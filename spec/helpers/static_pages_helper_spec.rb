@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
 # the StaticPagesHelper. For example:
@@ -10,6 +10,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe "StaticPagesHelper" do
+describe StaticPagesHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end

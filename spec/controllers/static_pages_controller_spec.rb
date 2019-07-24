@@ -1,18 +1,32 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe StaticPagesController, type: :request do
+describe StaticPagesController do
+
+  def setup
+    @base_title = "Ruby on Rails Tutorial Sample App"
+  end
 
   describe "GET 'home'" do
     it "returns http success" do
       get 'home'
-      response.should be_success
+      expect(response.status).to eq 200
+      expect(response.body).to have_title 'Home | Ruby on Rails Tutorial Sample App'
     end
   end
 
   describe "GET 'help'" do
     it "returns http success" do
       get 'help'
-      response.should be_success
+      expect(response.status).to eq 200
+      expect(response.body).to have_title 'Help | #{@base_title}'
+    end
+  end
+
+  describe "GET 'about'" do
+    it "returns http success" do
+      get 'about'
+      expect(response.status).to eq 200
+      expect(response.body).to have_title 'About | #{@base_title}'
     end
   end
 
