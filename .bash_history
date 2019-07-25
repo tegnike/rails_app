@@ -11,3 +11,9 @@ sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/mas
 brew --version
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" --force
 exit
+rspec
+rspec
+exit
+time
+time rspec
+exit
