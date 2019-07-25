@@ -36,23 +36,24 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'rspec-rails', '~> 3.8'
-  gem 'factory_girl_rails', '~> 4.4.1'
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
 end
 
 group :test do
-  gem 'faker', '~> 1.1.2'
-  gem 'capybara', '>= 2.15'
-  gem 'database_cleaner', '~> 1.0.1'
-  gem 'launchy', '~> 2.3.0'
-  gem 'selenium-webdriver', '~>2.45.0'
+  gem 'faker'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'selenium-webdriver'
   # gem 'capybara-webkit', '1.15.1'
 end
+
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
