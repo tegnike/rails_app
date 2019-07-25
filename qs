@@ -82,7 +82,8 @@ create_project() {
 
 init_services() {
     echoing "Building containers"
-    $dc build --no-cache
+    $dc down -v
+    $dc build --no-cache $app
 
     bundle_cmd install
     run_yarn install
@@ -91,7 +92,7 @@ init_services() {
 
     rm_pids
 
-    $dc up
+    $dc up $app
 }
 
 compose_up() {
