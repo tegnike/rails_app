@@ -7,6 +7,12 @@ describe StaticPagesController, type: :request do
   }
 
   describe "GET static pages" do
+    it "root returns http success" do
+      get root_url
+      expect(response.status).to eq 200
+      expect(response.body).to include("Home | #{@base_title}")
+    end
+
     it "home page returns http success" do
       get static_pages_home_path
       expect(response.status).to eq 200
