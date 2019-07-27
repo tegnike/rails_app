@@ -4,6 +4,7 @@ ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_bot_rails'
+require 'shoulda/matchers'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -59,5 +60,19 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    # 今回はRspecを使うのでこのように設定
+    with.test_framework :rspec
+
+    # shoulda-matchersを使いたいテストライブラリを指定
+    with.library :active_record
+    with.library :active_model
+    with.library :action_controller
+    # Or, choose the following (which implies all of the above):
+    with.library :rails
   end
 end

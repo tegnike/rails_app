@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -54,6 +54,7 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   # gem 'capybara-webkit', '1.15.1'
+  gem 'shoulda-matchers'
 end
 
 group :development do
