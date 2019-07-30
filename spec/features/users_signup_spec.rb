@@ -3,44 +3,35 @@ require 'rails_helper'
 RSpec.feature "UsersSignup", type: :feature do
   describe "サインアップを確認する" do
     context "無効なユーザでサインアップした場合" do
-      subject {
+      before {
         visit signup_path
         fill_in "Name", with: ""
         fill_in "Email", with: "user@invalid"
         fill_in "Password", with: "foo"
         fill_in "Confirmation", with: "bar"
-        click_on 'Create my account' }
-      it "全User数に変化がないこと" do
-        expect{ subject }.to change{ User.count }.by(0)
-      end
-      it "'users/new'に遷移すること" do
-        subject
+        click_on 'Create my account'
+      }
+      it "ユーザーが登録されず、'users/new'に遷移し、失敗メッセージが表示される" do
+        expect(User.where(email: "user@invalid").first).not_to be
         expect(current_path).to eq signup_path
-      end
-      it "エラーメッセージが表示されること" do
-        subject
         expect(page).to have_css '#error_explanation'
       end
     end
 
     context "有効なユーザでサインアップした場合" do
-      subject {
+      before {
         visit signup_path
         fill_in "Name", with: "Example User"
         fill_in "Email", with: "user@example.com"
         fill_in "Password", with: "password"
         fill_in "Confirmation", with: "password"
-        click_on 'Create my account' }
-      it "全User数が1増加すること" do
-        expect{ subject }.to change{ User.count }.by(1)
-      end
-      it "'users/show'に遷移すること" do
-        subject
-        user_id = User.find_by(name: "Example User").id
-        expect(current_path).to eq user_path(user_id)
-      end
-      it "フラッシュメッセージが表示されること" do
-        subject
+        click_on 'Create my account'
+      }
+
+      it "ユーザーが登録され、'users/show'に遷移し、成功メッセージが表示される" do
+        user = User.find_by(name: "Example User")
+        expect(user).to be
+        expect(current_path).to eq user_path(user)
         expect(page).to have_css '.alert-success'
       end
     end
