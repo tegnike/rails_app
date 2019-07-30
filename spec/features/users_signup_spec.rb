@@ -34,10 +34,11 @@ RSpec.feature "UsersSignup", type: :feature do
       it "全User数が1増加すること" do
         expect{ subject }.to change{ User.count }.by(1)
       end
-      # it "'users/show'に遷移すること" do
-      #   subject
-      #   expect(current_path).to eq user_path(*)
-      # end
+      it "'users/show'に遷移すること" do
+        subject
+        user_id = User.find_by(name: "Example User").id
+        expect(current_path).to eq user_path(user_id)
+      end
       it "フラッシュメッセージが表示されること" do
         subject
         expect(page).to have_css '.alert-success'
