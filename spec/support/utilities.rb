@@ -6,3 +6,7 @@ def full_title(page_title)
     "#{page_title} | #{base_title}"
   end
 end
+
+def is_logged_in?
+  !session[:user_id].nil?
+end
