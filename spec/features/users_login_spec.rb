@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.feature "UsersLoginTest", type: :feature do
   describe "ログインを確認する" do
     let!(:user) { create(:user, email: "user@example.com") }
+
     context "無効な情報でログインを試みた場合" do
       before {
         visit login_path
@@ -42,6 +43,10 @@ RSpec.feature "UsersLoginTest", type: :feature do
         expect(page).to have_no_link 'Log out'
         expect(page).to have_no_link 'Profile'
       end
+    end
+
+    context "ダイジェストが存在しない場合" do
+      it { expect(user.authenticated?('')).to be_falsey }
     end
   end
 end
