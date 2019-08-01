@@ -50,6 +50,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   config.infer_spec_type_from_file_location!
   config.include FactoryBot::Syntax::Methods
+  config.include RequestHelpers, type: :request
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

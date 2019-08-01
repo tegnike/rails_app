@@ -56,6 +56,7 @@ group :test do
   gem 'selenium-webdriver'
   # gem 'capybara-webkit', '1.15.1'
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 group :development do
