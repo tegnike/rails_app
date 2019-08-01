@@ -4,6 +4,10 @@ RSpec.feature "UsersLoginTest", type: :request do
   describe "ログインを確認する" do
     let!(:user) { create(:user, email: "user@example.com") }
 
+    def is_logged_in?
+      !session[:user_id].nil?
+    end
+
     context "有効な情報でログインを試みた場合" do
       before {
         post login_path, params: { session: { email: "user@example.com",
@@ -23,6 +27,14 @@ RSpec.feature "UsersLoginTest", type: :request do
 
   describe "リメンバーミー機能を確認する" do
     let!(:user) { create(:user, email: "user@example.com") }
+
+    # テストユーザーとしてログインする
+    def log_in_as(user, password: 'password', remember_me: '1')
+      post login_path, params: { session: { email: user.email,
+                                            password: password,
+                                            remember_me: remember_me } }
+    end
+
     context "リメンバーミーにチェックした場合" do
       before {
         log_in_as(user, remember_me: '1')
