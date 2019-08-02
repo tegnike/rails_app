@@ -29,15 +29,18 @@ RSpec.feature "UsersLoginTest", type: :feature do
         fill_in "Password", with: "password"
         click_button 'Log in'
       }
+
       it "user_pathにリダイレクトされること" do
         expect(current_path).to eq user_path(user.id)
       end
       it "ヘッダーのリンク表示が変わること" do
+        page.first(".dropdown").click
         expect(page).to have_no_link 'Log in'
         expect(page).to have_link 'Log out'
         expect(page).to have_link 'Profile'
       end
       it "ログアウト後、ヘッダーのリンク表示が変わること" do
+        page.first(".dropdown").click
         click_on 'Log out'
         expect(page).to have_link 'Log in'
         expect(page).to have_no_link 'Log out'
