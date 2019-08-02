@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UsersLoginTest", type: :feature do
+RSpec.describe "UsersLoginTest", type: :system, js: true do
   describe "ログインを確認する" do
     let!(:user) { create(:user, email: "user@example.com") }
 
