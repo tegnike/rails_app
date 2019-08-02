@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UserPages", type: :feature do
+RSpec.describe "UserPages", type: :system, js: true do
   describe "signup page" do
     before do
       visit signup_path
