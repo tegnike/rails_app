@@ -175,6 +175,10 @@ run_solargraph() {
     invoke_run solargraph $*
 }
 
+run_chrome() {
+    $dc exec chrome $*
+}
+
 rails_server() {
     compose_stop $app
     rm_pids
@@ -265,6 +269,10 @@ spring_cmd() {
 
 solargraph_cmd() {
     run_solargraph solargraph $*
+}
+
+chrome_cmd() {
+    run_chrome chrome $*
 }
 
 rake_reset_db() {

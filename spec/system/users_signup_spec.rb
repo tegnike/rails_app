@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UsersSignup", type: :feature do
+RSpec.describe "UsersSignup", type: :system, js: true do
   describe "サインアップを確認する" do
     context "無効なユーザでサインアップした場合" do
       before {
