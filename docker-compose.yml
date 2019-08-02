@@ -28,6 +28,7 @@ services:
     tty: true
     links:
       - db
+      - chrome
   spring:
     <<: *app
     command: bundle exec spring server
