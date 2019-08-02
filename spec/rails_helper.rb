@@ -3,6 +3,7 @@ require 'spec_helper'
 ENV["RAILS_ENV"] = 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'capybara/rspec'
 require 'factory_bot_rails'
 require 'shoulda/matchers'
 
@@ -61,6 +62,14 @@ RSpec.configure do |config|
     DatabaseCleaner.cleaning do
       example.run
     end
+  end
+
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome
+  end
+
+  config.before(:each, type: :system, js: true) do
+    driven_by :selenium_chrome
   end
 end
 
