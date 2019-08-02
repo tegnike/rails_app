@@ -70,6 +70,7 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_chrome
+    host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
 end
 
