@@ -31,6 +31,10 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
 
+gem 'faker',          '1.7.3'
+gem 'will_paginate',           '3.1.7'
+gem 'bootstrap-will_paginate', '1.0.0'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -49,7 +53,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'faker'
+  # gem 'faker'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
