@@ -52,6 +52,7 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include FactoryBot::Syntax::Methods
   config.include RequestHelpers, type: :request
+  config.include SessionsHelper, type: :helper
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

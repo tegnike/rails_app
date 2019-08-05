@@ -33,7 +33,8 @@ RSpec.describe "UsersEditTest", type: :request do
         expect(response).to redirect_to user_path(user)
       end
       it "ユーザ名が更新されること" do
-        expect(User.find(user.id).name).to eq('Example2')
+        user.reload
+        expect(user.name).to eq('Example2')
       end
     end
 
@@ -53,7 +54,8 @@ RSpec.describe "UsersEditTest", type: :request do
         expect(response).to redirect_to login_url
       end
       it "ユーザ名が更新されないこと" do
-        expect(User.find(user.id).name).not_to eq('Example2')
+        user.reload
+        expect(user.name).not_to eq('Example2')
       end
     end
   end
