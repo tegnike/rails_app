@@ -29,10 +29,8 @@ RSpec.describe "UsersEditTest", type: :request do
                                                   password:              "",
                                                   password_confirmation: "" } }
       }
-      it "user_pathにリダイレクトされること" do
+      it "user_pathにリダイレクトされ、ユーザ名が更新されること" do
         expect(response).to redirect_to user_path(user)
-      end
-      it "ユーザ名が更新されること" do
         user.reload
         expect(user.name).to eq('Example2')
       end
@@ -50,10 +48,8 @@ RSpec.describe "UsersEditTest", type: :request do
         put user_path(user), params: { user: { name: "Example2",
                                                   email: user.email } }
       }
-      it "ログイン画面にリダイレクトされること" do
+      it "ログイン画面にリダイレクトされ、ユーザ名が更新されないこと" do
         expect(response).to redirect_to login_url
-      end
-      it "ユーザ名が更新されないこと" do
         user.reload
         expect(user.name).not_to eq('Example2')
       end
