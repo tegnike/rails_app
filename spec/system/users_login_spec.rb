@@ -31,7 +31,7 @@ RSpec.describe "UsersLoginTest", type: :system, js: true do
       }
 
       it "user_pathにリダイレクトされること" do
-        expect(current_path).to eq user_path(user.id)
+        expect(current_path).to eq user_path(user)
       end
       it "ヘッダーのリンク表示が変わること" do
         page.first(".dropdown").click

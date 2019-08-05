@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe SessionsHelper, type: :helper do
+
   describe "永続的セッションの仕様を確認する" do
-    include SessionsHelper
     let!(:user) { create(:user, email: "user@example.com") }
     before {
       remember(user)
