@@ -27,12 +27,9 @@ RSpec.describe "UsersSignup", type: :system, js: true do
         fill_in "Confirmation", with: "password"
         click_on 'Create my account'
       }
-
-      it "ユーザーが登録され、'users/show'に遷移し、成功メッセージが表示される" do
-        user = User.find_by(name: "Example User")
-        expect(user).to be
-        expect(current_path).to eq user_path(user)
-        expect(page).to have_css '.alert-success'
+      it "root_pathに遷移し、メッセージが表示される" do
+        expect(current_path).to eq root_path
+        expect(page).to have_css '.alert-info'
       end
     end
   end

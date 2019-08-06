@@ -49,7 +49,7 @@ RSpec.describe "UsersLoginTest", type: :system, js: true do
     end
 
     context "ダイジェストが存在しない場合" do
-      it { expect(user.authenticated?('')).to be_falsey }
+      it { expect(user.authenticated?(:remember, '')).to be_falsey }
     end
   end
 end
