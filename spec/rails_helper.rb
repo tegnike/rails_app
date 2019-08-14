@@ -73,6 +73,14 @@ RSpec.configure do |config|
     driven_by :selenium_chrome
     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
+
+  # aggregate_failures すべてのテストに適用する
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true unless meta.key?(:aggregate_failures)
+  end
+
+  # 失敗したテストだけを再実行できる（--only-failures オプション）
+  config.example_status_persistence_file_path = "./spec/examples.txt"
 end
 
 Shoulda::Matchers.configure do |config|
