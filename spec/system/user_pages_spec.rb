@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "UserPages", type: :system, js: true do
   describe "signup page" do
@@ -13,7 +15,7 @@ RSpec.describe "UserPages", type: :system, js: true do
 
     # タイトルが正しく表示されていること
     it "should have the right title" do
-      expect(page).to have_title full_title('Sign up')
+      expect(page).to have_title full_title("Sign up")
     end
   end
 end

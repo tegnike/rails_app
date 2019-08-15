@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "rails_helper"
 
 RSpec.describe UserMailer, type: :mailer do
@@ -33,5 +35,4 @@ RSpec.describe UserMailer, type: :mailer do
       expect(mail.body.encoded).to match(CGI.escape(user.email))
     end
   end
-
 end

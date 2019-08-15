@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PasswordResetsController < ApplicationController
   before_action :get_user,         only: [:edit, :update]
   before_action :valid_user,       only: [:edit, :update]
@@ -15,7 +17,7 @@ class PasswordResetsController < ApplicationController
       redirect_to root_url
     else
       flash.now[:danger] = "Email address not found"
-      render 'new'
+      render "new"
     end
   end
 
@@ -25,19 +27,18 @@ class PasswordResetsController < ApplicationController
   def update
     if params[:user][:password].empty?                  # (3) への対応
       @user.errors.add(:password, :blank)
-      render 'edit'
+      render "edit"
     elsif @user.update_attributes(user_params)          # (4) への対応
       log_in @user
       @user.update_attribute(:reset_digest, nil)
       flash[:success] = "Password has been reset."
       redirect_to @user
     else
-      render 'edit'                                     # (2) への対応
+      render "edit"                                     # (2) への対応
     end
   end
 
   private
-
     def user_params
       params.require(:user).permit(:password, :password_confirmation)
     end
@@ -50,7 +51,7 @@ class PasswordResetsController < ApplicationController
 
     # 有効なユーザーかどうか確認する
     def valid_user
-      unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+      unless @user && @user.activated? && @user.authenticated?(:reset, params[:id])
         redirect_to root_url
       end
     end

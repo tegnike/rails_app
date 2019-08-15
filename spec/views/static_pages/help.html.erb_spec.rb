@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe "static_pages/help.html.erb" do
   pending "add some examples to (or delete) #{__FILE__}"

@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "UsersEditTest", type: :request do
   describe "ユーザー編集をテストする" do
@@ -13,10 +15,10 @@ RSpec.describe "UsersEditTest", type: :request do
                                                   password_confirmation: "bar" } }
       }
       it "edit_user_pathにレンダーされること" do
-        expect(response).to render_template 'users/edit'
+        expect(response).to render_template "users/edit"
       end
       it "フラッシュメッセージが表示されること" do
-        expect(response.body).to include 'alert-danger'
+        expect(response.body).to include "alert-danger"
       end
     end
 
@@ -32,7 +34,7 @@ RSpec.describe "UsersEditTest", type: :request do
       it "user_pathにリダイレクトされ、ユーザ名が更新されること" do
         expect(response).to redirect_to user_path(user)
         user.reload
-        expect(user.name).to eq('Example2')
+        expect(user.name).to eq("Example2")
       end
     end
 
@@ -51,7 +53,7 @@ RSpec.describe "UsersEditTest", type: :request do
       it "ログイン画面にリダイレクトされ、ユーザ名が更新されないこと" do
         expect(response).to redirect_to login_url
         user.reload
-        expect(user.name).not_to eq('Example2')
+        expect(user.name).not_to eq("Example2")
       end
     end
   end

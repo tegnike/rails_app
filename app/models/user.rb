@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
@@ -68,7 +70,6 @@ class User < ApplicationRecord
   end
 
   private
-
     # メールアドレスをすべて小文字にする
     def downcase_email
       self.email.downcase!

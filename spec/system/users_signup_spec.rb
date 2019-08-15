@@ -1,4 +1,6 @@
-require 'rails_helper'
+# frozen_string_literal: true
+
+require "rails_helper"
 
 RSpec.describe "UsersSignup", type: :system, js: true do
   describe "サインアップを確認する" do
@@ -9,12 +11,12 @@ RSpec.describe "UsersSignup", type: :system, js: true do
         fill_in "Email", with: "user@invalid"
         fill_in "Password", with: "foo"
         fill_in "Confirmation", with: "bar"
-        click_on 'Create my account'
+        click_on "Create my account"
       }
       it "ユーザーが登録されず、'users/new'に遷移し、失敗メッセージが表示される" do
         expect(User.where(email: "user@invalid").first).not_to be
         expect(current_path).to eq signup_path
-        expect(page).to have_css '#error_explanation'
+        expect(page).to have_css "#error_explanation"
       end
     end
 
@@ -25,14 +27,12 @@ RSpec.describe "UsersSignup", type: :system, js: true do
         fill_in "Email", with: "user@example.com"
         fill_in "Password", with: "password"
         fill_in "Confirmation", with: "password"
-        click_on 'Create my account'
+        click_on "Create my account"
       }
       it "root_pathに遷移し、メッセージが表示される" do
         expect(current_path).to eq root_path
-        expect(page).to have_css '.alert-info'
+        expect(page).to have_css ".alert-info"
       end
     end
   end
-
-
 end
