@@ -52,6 +52,11 @@ group :development, :test do
   gem 'webdrivers'
   # カバレッジ取得
   gem "simplecov"
+  gem "rubocop"
+  gem "rubocop-performance"
+  gem "rubocop-rails"
+  gem "rubocop-rspec"
+  gem "rspec_junit_formatter"
 end
 
 group :test do
