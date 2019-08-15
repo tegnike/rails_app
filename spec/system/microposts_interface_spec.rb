@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe "MicropostsInterfaceTest", type: :system, js: true do
   describe "micropostのUIをテストする" do
+    let(:michael) { create(:michael) }
+    let(:archer) { create(:archer) }
     before {
-      @michael = create(:michael)
-      @archer = create(:archer)
-      create_list(:micropost, 30, user_id: @michael.id)
-      create_list(:micropost, 30, user_id: @archer.id)
+      create_list(:micropost, 30, user_id: michael.id)
+      create_list(:micropost, 30, user_id: archer.id)
 
       visit login_path
       fill_in 'Email', with: 'michael@example.com' #michaelでログイン
@@ -47,15 +47,15 @@ RSpec.describe "MicropostsInterfaceTest", type: :system, js: true do
       end
     end
     context "違うユーザー（archer）のプロフィールにアクセスした場合" do
-      before { visit user_path(@archer) }
+      before { visit user_path(archer) }
       it "削除リンクが表示されていないこと" do
         expect(page).not_to have_link 'delete'
       end
     end
   end
   describe "サイドバーでmicropostの投稿数をテストする" do
+    let!(:user) { create(:user, email: 'user@example.com') }
     before {
-      user = create(:user, email: 'user@example.com')
       visit login_path
       fill_in 'Email', with: 'user@example.com'
       fill_in 'Password', with: 'password'

@@ -22,7 +22,7 @@ RSpec.feature "UsersLoginTest", type: :request do
   end
 
   describe "リメンバーミー機能を確認する" do
-    let!(:user) { create(:user, email: "user@example.com") }
+    let(:user) { create(:user, email: "user@example.com") }
     context "リメンバーミーにチェックした場合" do
       before {
         log_in_as(user, remember_me: '1')

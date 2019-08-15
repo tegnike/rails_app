@@ -72,11 +72,11 @@ RSpec.describe User, type: :model do
 
   describe "ユーザー削除時の仕様をテストする" do
     before {
-      @user = user
-      @user.microposts.create!(content: "Lorem ipsum")
+      user.microposts.create!(content: "Lorem ipsum")
+      user.destroy
     }
     it "関連するマイクロソフトも削除されること" do
-      expect { @user.destroy }.to change{ Micropost.count }.by(-1)
+      expect(Micropost.where(user: user)).to be_empty
     end
   end
 end
