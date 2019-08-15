@@ -58,6 +58,8 @@ group :development, :test do
   gem "rubocop-performance"
   gem "rubocop-rails"
   gem "rubocop-rspec"
+  # for Cilcle/CI　 
+  gem "rspec_junit_formatter"
 end
 
 group :test do

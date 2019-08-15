@@ -4,71 +4,62 @@
 #
 version: 2
 jobs:
-  rubocop:
+  build:
     docker:
-      - image: circleci/ruby:2.6.0-node-browsers-legacy
-        environment:
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:9.4
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: app_test
+      # specify the version you desire here
+      - image: circleci/ruby:2.6.3
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
     working_directory: ~/repo
+
+    branches:
+        only:
+          - master
+
     steps:
       - checkout
+
+      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Gemfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run: yarn install
+
+      - run:
+          name: install dependencies
+          command: |
+            gem install bundler:2.0.1
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
       - save_cache:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # Rubocop
-      - run:
-          name: Rubocop
-          command: bundle exec rubocop
 
-  rspec:
-    docker:
-      - image: circleci/ruby:2.6.0-node-browsers-legacy
-        environment:
-          RAILS_ENV: test
-          POSTGRES_HOST: 127.0.0.1
-      - image: circleci/postgres:9.4
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: app_test
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
-      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - run: yarn install
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      # Rspec
-      - run:
-          name: Rspec
-          command: bundle exec rspec
+      # Database setup
+      # - run: bundle exec rake db:create
+      # - run: bundle exec rake db:schema:load
 
-workflows:
-  version: 2
-  rubocop_rspec:
-    jobs:
-      - rubocop
-      - rspec:
-          requires:
-            - rubocop
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
