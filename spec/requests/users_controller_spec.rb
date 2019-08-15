@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UsersController, type: :request do
-
   describe "GET #index" do
     context "ログインしていない場合"
     it "ログイン画面にリダイレクトされること" do
@@ -47,8 +46,8 @@ RSpec.describe UsersController, type: :request do
       it "リクエストが成功すること" do
         expect(response.status).to eq 302
       end
-      it 'ユーザー名が更新されること' do
-        expect(User.find(michael.id).name).to eq('michael2')
+      it "ユーザー名が更新されること" do
+        expect(User.find(michael.id).name).to eq("michael2")
       end
     end
     context "他人の編集情報を送信した場合" do
@@ -61,7 +60,7 @@ RSpec.describe UsersController, type: :request do
       end
     end
     context "adminをtrueに編集して情報を送信した場合" do
-      let!(:user) { create(:user, email: "user@example.com")}
+      let!(:user) { create(:user, email: "user@example.com") }
       before {
         put user_path(user), params: { user: { name: user.name,
                                                   email: user.email,
@@ -74,12 +73,12 @@ RSpec.describe UsersController, type: :request do
   end
 
   describe "DELETE #destroy" do
-    let!(:michael) { create(:michael) } #adminユーザー
+    let!(:michael) { create(:michael) } # adminユーザー
     let!(:archer) { create(:archer) }
     context "ログインせずに削除を実行した場合" do
       subject { delete user_path(michael) }
       it "ユーザーは変化せず、ログイン画面にリダイレクトされること" do
-        expect{subject}.to change{ User.count }.by(0)
+        expect { subject }.to change { User.count }.by(0)
         expect(response).to redirect_to login_url
       end
     end
@@ -89,7 +88,7 @@ RSpec.describe UsersController, type: :request do
         delete user_path(michael)
       }
       it "ユーザー数は変化せず、ルート画面にリダイレクトされること" do
-        expect{subject}.to change{ User.count }.by(0)
+        expect { subject }.to change { User.count }.by(0)
         expect(response).to redirect_to root_url
       end
     end
@@ -97,9 +96,8 @@ RSpec.describe UsersController, type: :request do
       before { log_in_as(michael) }
       subject { delete user_path(archer) }
       it "ユーザーが1減ること" do
-        expect{subject}.to change{ User.count }.by(-1)
+        expect { subject }.to change { User.count }.by(-1)
       end
     end
   end
-
 end

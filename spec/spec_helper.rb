@@ -15,9 +15,9 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'simplecov'
+require "simplecov"
 
-SimpleCov.start 'rails'
+SimpleCov.start "rails"
 
 RSpec.configure do |config|
   config.warnings = false

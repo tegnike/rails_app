@@ -1,7 +1,6 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe StaticPagesController, type: :request do
-
   before(:all) {
     @base_title = "Ruby on Rails Tutorial Sample App"
   }
@@ -31,5 +30,4 @@ RSpec.describe StaticPagesController, type: :request do
       expect(response.body).to include "Contact | #{@base_title}"
     end
   end
-
 end
