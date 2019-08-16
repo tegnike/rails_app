@@ -2,7 +2,11 @@ require "rails_helper"
 
 RSpec.describe "PasswordReset", type: :request do
   describe "パスワード再設定用のメール送信をテストする" do
+<<<<<<< HEAD
     let!(:user) { create(:michael) }
+=======
+    let(:user) { create(:michael)}
+>>>>>>> master
     context "メールアドレスが無効の場合" do
       before { post password_resets_path, params: { password_reset: { email: "" } } }
       it "エラーメッセージが表示されること" do
@@ -28,7 +32,11 @@ RSpec.describe "PasswordReset", type: :request do
   end
 
   describe "メールリンクをテストする" do
+<<<<<<< HEAD
     let!(:user) { create(:michael) }
+=======
+    let(:user) { create(:michael)}
+>>>>>>> master
     before {
       post password_resets_path, params: { password_reset: { email: user.email } }
       @user = assigns(:user)
@@ -63,7 +71,11 @@ RSpec.describe "PasswordReset", type: :request do
   end
 
   describe "パスワード再設定フォームをテストする" do
+<<<<<<< HEAD
     let!(:user) { create(:michael) }
+=======
+    let(:user) { create(:michael)}
+>>>>>>> master
     before {
       post password_resets_path, params: { password_reset: { email: user.email } }
       @user = assigns(:user)
@@ -105,7 +117,11 @@ RSpec.describe "PasswordReset", type: :request do
   end
 
   describe "パスワード再設定の期限切れをテストする" do
+<<<<<<< HEAD
     let!(:user) { create(:michael) }
+=======
+    let(:user) { create(:michael)}
+>>>>>>> master
     before {
       post password_resets_path, params: { password_reset: { email: user.email } }
       @user = assigns(:user)

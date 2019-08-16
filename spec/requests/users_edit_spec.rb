@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "UsersEditTest", type: :request do
   describe "ユーザー編集をテストする" do
-    let!(:user) { create(:user, name: "Example", email: "user@example.com") }
+    let(:user) { create(:user, name: "Example", email: "user@example.com") }
     context "無効な情報で編集を試みた場合" do
       before {
         log_in_as(user)
@@ -57,7 +57,7 @@ RSpec.describe "UsersEditTest", type: :request do
   end
 
   describe "フレンドリーフォワーディングをテストする" do
-    let!(:user) { create(:user, name: "Example", email: "user@example.com") }
+    let(:user) { create(:user, name: "Example", email: "user@example.com") }
     context "ログインせずに編集画面へアクセスした場合" do
       before { get edit_user_path(user) }
       it "ログイン後に編集画面へリダイレクトされること" do

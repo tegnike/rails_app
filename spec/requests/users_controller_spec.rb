@@ -60,7 +60,11 @@ RSpec.describe UsersController, type: :request do
       end
     end
     context "adminをtrueに編集して情報を送信した場合" do
+<<<<<<< HEAD
       let!(:user) { create(:user, email: "user@example.com") }
+=======
+      let(:user) { create(:user, email: "user@example.com")}
+>>>>>>> master
       before {
         put user_path(user), params: { user: { name: user.name,
                                                   email: user.email,

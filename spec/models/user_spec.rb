@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
   describe "Userの有効性を確認する" do
     it "有効なファクトリを持つこと" do
@@ -67,6 +67,16 @@ RSpec.describe User, type: :model do
         user.valid?
         expect(user.errors[:password_confirmation]).to include("doesn't match Password")
       end
+    end
+  end
+
+  describe "ユーザー削除時の仕様をテストする" do
+    before {
+      user.microposts.create!(content: "Lorem ipsum")
+      user.destroy
+    }
+    it "関連するマイクロソフトも削除されること" do
+      expect(Micropost.where(user: user)).to be_empty
     end
   end
 end
