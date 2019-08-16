@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Micropost, type: :model do
   let(:user) { create(:user) }
@@ -25,5 +25,4 @@ RSpec.describe Micropost, type: :model do
       expect(Micropost.first).to eq most_recent
     end
   end
-
 end

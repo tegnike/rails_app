@@ -1,12 +1,7 @@
 require "rails_helper"
 
 RSpec.describe StaticPagesController, type: :request do
-<<<<<<< HEAD
-  before(:all) {
-=======
-
   before {
->>>>>>> master
     @base_title = "Ruby on Rails Tutorial Sample App"
   }
 

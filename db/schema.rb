@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2019_08_08_142433) do
-=======
 ActiveRecord::Schema.define(version: 2019_08_14_090031) do
-
->>>>>>> master
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,9 +39,6 @@ ActiveRecord::Schema.define(version: 2019_08_14_090031) do
     t.datetime "reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
-<<<<<<< HEAD
-=======
 
   add_foreign_key "microposts", "users"
->>>>>>> master
 end

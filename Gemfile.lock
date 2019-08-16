@@ -263,11 +263,8 @@ GEM
       domain_name (~> 0.5)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-<<<<<<< HEAD
-    jaro_winkler (1.5.3)
-=======
     ipaddress (0.8.3)
->>>>>>> master
+    jaro_winkler (1.5.3)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-rails (4.3.1)
@@ -303,15 +300,12 @@ GEM
     nio4r (2.4.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
-<<<<<<< HEAD
-    parallel (1.17.0)
-    parser (2.6.3.0)
-      ast (~> 2.4.0)
-=======
     optimist (3.0.0)
     ovirt-engine-sdk (4.3.0)
       json (>= 1, < 3)
->>>>>>> master
+    parallel (1.17.0)
+    parser (2.6.3.0)
+      ast (~> 2.4.0)
     pg (0.20.0)
     public_suffix (3.1.1)
     puma (3.12.1)
@@ -446,13 +440,10 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.20)
       execjs (>= 0.3.0, < 3)
-<<<<<<< HEAD
-    unicode-display_width (1.6.0)
-=======
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
->>>>>>> master
+    unicode-display_width (1.6.0)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
