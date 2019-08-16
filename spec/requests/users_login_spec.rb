@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.feature "UsersLoginTest", type: :request do
   describe "ログインを確認する" do
@@ -15,7 +15,7 @@ RSpec.feature "UsersLoginTest", type: :request do
         delete logout_path
         delete logout_path
         follow_redirect!
-        expect(response).to render_template('static_pages/home')
+        expect(response).to render_template("static_pages/home")
         expect(is_logged_in?).to be_falsey
       end
     end
@@ -25,18 +25,18 @@ RSpec.feature "UsersLoginTest", type: :request do
     let(:user) { create(:user, email: "user@example.com") }
     context "リメンバーミーにチェックした場合" do
       before {
-        log_in_as(user, remember_me: '1')
+        log_in_as(user, remember_me: "1")
       }
       it "クッキーがnilでない" do
-        expect(cookies['remember_token']).to be_truthy
+        expect(cookies["remember_token"]).to be_truthy
       end
     end
     context "リメンバーミーにチェックしなかった場合" do
       before {
-        log_in_as(user, remember_me: '0')
+        log_in_as(user, remember_me: "0")
       }
       it "クッキーがnilである" do
-        expect(cookies['remember_token']).to be_falsey
+        expect(cookies["remember_token"]).to be_falsey
       end
     end
   end

@@ -1,13 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "PasswordReset", type: :request do
-
   describe "パスワード再設定用のメール送信をテストする" do
+<<<<<<< HEAD
+    let!(:user) { create(:michael) }
+=======
     let(:user) { create(:michael)}
+>>>>>>> master
     context "メールアドレスが無効の場合" do
       before { post password_resets_path, params: { password_reset: { email: "" } } }
       it "エラーメッセージが表示されること" do
-        expect(response.body).to include 'alert-danger'
+        expect(response.body).to include "alert-danger"
       end
     end
     context "メールアドレスが有効な場合" do
@@ -22,14 +25,18 @@ RSpec.describe "PasswordReset", type: :request do
         expect(ActionMailer::Base.deliveries.size).to eq 1
       end
       it "root_urlにリダイレクトされること" do
-        expect(response.body).not_to include 'alert-danger'
+        expect(response.body).not_to include "alert-danger"
         expect(response).to redirect_to root_url
       end
     end
   end
 
   describe "メールリンクをテストする" do
+<<<<<<< HEAD
+    let!(:user) { create(:michael) }
+=======
     let(:user) { create(:michael)}
+>>>>>>> master
     before {
       post password_resets_path, params: { password_reset: { email: user.email } }
       @user = assigns(:user)
@@ -50,7 +57,7 @@ RSpec.describe "PasswordReset", type: :request do
       end
     end
     context "メールアドレスが有効で、トークンが無効な場合" do
-      before { get edit_password_reset_path('wrong token', email: @user.email) }
+      before { get edit_password_reset_path("wrong token", email: @user.email) }
       it "root_urlにリダイレクトされること" do
         expect(response).to redirect_to root_url
       end
@@ -64,7 +71,11 @@ RSpec.describe "PasswordReset", type: :request do
   end
 
   describe "パスワード再設定フォームをテストする" do
+<<<<<<< HEAD
+    let!(:user) { create(:michael) }
+=======
     let(:user) { create(:michael)}
+>>>>>>> master
     before {
       post password_resets_path, params: { password_reset: { email: user.email } }
       @user = assigns(:user)
@@ -77,7 +88,7 @@ RSpec.describe "PasswordReset", type: :request do
                             password_confirmation: "barquux" } }
       }
       it "エラーメッセージが表示されること" do
-        expect(response.body).to include 'error_explanation'
+        expect(response.body).to include "error_explanation"
       end
     end
     context "パスワードが空の場合" do
@@ -88,7 +99,7 @@ RSpec.describe "PasswordReset", type: :request do
                             password_confirmation: "" } }
       }
       it "エラーメッセージが表示されること" do
-        expect(response.body).to include 'error_explanation'
+        expect(response.body).to include "error_explanation"
       end
     end
     context "パスワードが有効な場合" do
@@ -106,7 +117,11 @@ RSpec.describe "PasswordReset", type: :request do
   end
 
   describe "パスワード再設定の期限切れをテストする" do
+<<<<<<< HEAD
+    let!(:user) { create(:michael) }
+=======
     let(:user) { create(:michael)}
+>>>>>>> master
     before {
       post password_resets_path, params: { password_reset: { email: user.email } }
       @user = assigns(:user)

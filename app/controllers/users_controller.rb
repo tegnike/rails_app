@@ -13,8 +13,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+<<<<<<< HEAD
+    redirect_to(root_url) && (return) unless @user.activated?
+=======
     @microposts = @user.microposts.paginate(page: params[:page])
     redirect_to root_url and return unless @user.activated?
+>>>>>>> master
   end
 
   def create
@@ -24,7 +28,7 @@ class UsersController < ApplicationController
       flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -38,7 +42,7 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -49,7 +53,6 @@ class UsersController < ApplicationController
   end
 
   private
-
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
@@ -66,5 +69,4 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin?
     end
-
 end

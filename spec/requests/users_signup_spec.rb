@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "UsersSignup", type: :request do
   describe "アクティブ機能付きのサインアップを確認する" do
@@ -22,7 +22,7 @@ RSpec.describe "UsersSignup", type: :request do
       end
     end
     context "トークンは正しいがメールアドレスが無効な場合" do
-      before { get edit_account_activation_path(@user.activation_token, email: 'wrong') }
+      before { get edit_account_activation_path(@user.activation_token, email: "wrong") }
       it "ログインできないこと" do
         expect(is_logged_in?).to be_falsey
       end
