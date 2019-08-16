@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StaticPagesController, type: :request do
 
-  before(:all) {
+  before {
     @base_title = "Ruby on Rails Tutorial Sample App"
   }
 
