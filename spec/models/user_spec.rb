@@ -79,4 +79,19 @@ RSpec.describe User, type: :model do
       expect(Micropost.where(user: user)).to be_empty
     end
   end
+
+  describe "followとunfollowをテストする" do
+    let(:michael) { create(:michael) }
+    let(:archer) { create(:archer) }
+    subject(:follow) { michael.follow(archer) }
+    subject(:unfollow) { michael.unfollow(archer) }
+    it "フォローメソッドが正しく機能していること" do
+      expect(michael.following?(archer)).to be_falsey
+      follow
+      expect(michael.following?(archer)).to be_truthy
+      expect(archer.followers.include?(michael)).to be_truthy
+      unfollow
+      expect(michael.following?(archer)).to be_falsey
+    end
+  end
 end
