@@ -12,7 +12,7 @@ RSpec.describe "Following", type: :system, js: true do
       create(:relationship, follower_id: user2.id, followed_id: user1.id)
       create(:relationship, follower_id: user4.id, followed_id: user1.id)
 
-      visit login_path
+      visit login_path # user1でログイン
       fill_in "Email", with: "user@example.com"
       fill_in "Password", with: "password"
       click_button "Log in"
@@ -35,6 +35,16 @@ RSpec.describe "Following", type: :system, js: true do
         user1.followers.each do |user|
           expect(page).to have_link "#{user.name}"
         end
+      end
+    end
+    context "他ユーザページへアクセスした場合" do
+      before { visit user_path(user4) }
+      it "follow/unfollowボタンが正しく動作すること" do
+        expect(user1.active_relationships.where(followed_id: user4.id)).to be_empty
+        click_button "Follow"
+        expect(user1.active_relationships.where(followed_id: user4.id)).not_to be_empty
+        click_button "Unfollow"
+        expect(user1.active_relationships.where(followed_id: user4.id)).to be_empty
       end
     end
   end
