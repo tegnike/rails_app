@@ -42,8 +42,10 @@ RSpec.describe "Following", type: :system, js: true do
       it "follow/unfollowボタンが正しく動作すること" do
         expect(user1.active_relationships.where(followed_id: user4.id)).to be_empty
         click_button "Follow"
+        sleep 1
         expect(user1.active_relationships.where(followed_id: user4.id)).not_to be_empty
         click_button "Unfollow"
+        sleep 1
         expect(user1.active_relationships.where(followed_id: user4.id)).to be_empty
       end
     end
