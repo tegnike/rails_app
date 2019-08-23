@@ -40,13 +40,15 @@ RSpec.describe "Following", type: :system, js: true do
     context "他ユーザページへアクセスした場合" do
       before { visit user_path(user4) }
       it "follow/unfollowボタンが正しく動作すること" do
-        expect(user1.active_relationships.where(followed_id: user4.id)).to be_empty
+        expect(user1.following).not_to include(user4)
         click_button "Follow"
         sleep 1
-        expect(user1.active_relationships.where(followed_id: user4.id)).not_to be_empty
+        user1.reload
+        expect(user1.following).to include(user4)
         click_button "Unfollow"
         sleep 1
-        expect(user1.active_relationships.where(followed_id: user4.id)).to be_empty
+        user1.reload
+        expect(user1.following).not_to include(user4)
       end
     end
   end
