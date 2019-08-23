@@ -103,7 +103,7 @@ RSpec.describe User, type: :model do
       create(:micropost, user_id: user1.id)
       create(:micropost, user_id: user2.id)
       create(:micropost, user_id: user3.id)
-      create(:relationship, follower_id: user1.id, followed_id: user2.id) # user1がuser2をフォロー
+      user1.following << user2 # user1がuser2をフォロー
     }
     it "フォローしているユーザの投稿がfeedにあること" do
       user2.microposts.each do |post_following|

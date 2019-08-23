@@ -7,10 +7,10 @@ RSpec.describe "Following", type: :system, js: true do
     let(:user3) { create(:user) }
     let(:user4) { create(:user) }
     before {
-      create(:relationship, follower_id: user1.id, followed_id: user2.id)
-      create(:relationship, follower_id: user1.id, followed_id: user3.id)
-      create(:relationship, follower_id: user2.id, followed_id: user1.id)
-      create(:relationship, follower_id: user4.id, followed_id: user1.id)
+      user1.following << user2
+      user1.following << user3
+      user2.following << user1
+      user4.following << user1
 
       visit login_path # user1でログイン
       fill_in "Email", with: "user@example.com"
