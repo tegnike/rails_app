@@ -79,4 +79,46 @@ RSpec.describe User, type: :model do
       expect(Micropost.where(user: user)).to be_empty
     end
   end
+
+  describe "followとunfollowをテストする" do
+    let(:michael) { create(:michael) }
+    let(:archer) { create(:archer) }
+    subject(:follow) { michael.follow(archer) }
+    subject(:unfollow) { michael.unfollow(archer) }
+    it "フォローメソッドが正しく機能していること" do
+      expect(michael.following?(archer)).to be_falsey
+      follow
+      expect(michael.following?(archer)).to be_truthy
+      expect(archer.followers.include?(michael)).to be_truthy
+      unfollow
+      expect(michael.following?(archer)).to be_falsey
+    end
+  end
+
+  describe "ステータスをテストする" do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:user3) { create(:user) }
+    before {
+      create(:micropost, user_id: user1.id)
+      create(:micropost, user_id: user2.id)
+      create(:micropost, user_id: user3.id)
+      user1.following << user2 # user1がuser2をフォロー
+    }
+    it "フォローしているユーザの投稿がfeedにあること" do
+      user2.microposts.each do |post_following|
+        expect(user1.feed.include?(post_following)).to be_truthy
+      end
+    end
+    it "自分自身の投稿がfeedにあること" do
+      user1.microposts.each do |post_self|
+        expect(user1.feed.include?(post_self)).to be_truthy
+      end
+    end
+    it "フォローしていないユーザの投稿がfeedにないこと" do
+      user3.microposts.each do |post_unfollowed|
+        expect(user1.feed.include?(post_unfollowed)).to be_falsey
+      end
+    end
+  end
 end

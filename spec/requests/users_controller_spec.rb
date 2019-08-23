@@ -100,4 +100,21 @@ RSpec.describe UsersController, type: :request do
       end
     end
   end
+
+  describe "GET #following" do
+    let(:user) { create(:user) }
+    context "ログインしていない場合"
+    it "ログイン画面にリダイレクトされること" do
+      get following_user_path(user)
+      expect(response).to redirect_to login_url
+    end
+  end
+  describe "GET #followers" do
+    let(:user) { create(:user) }
+    context "ログインしていない場合"
+    it "ログイン画面にリダイレクトされること" do
+      get followers_user_path(user)
+      expect(response).to redirect_to login_url
+    end
+  end
 end
