@@ -16,8 +16,9 @@ RSpec.describe "MicropostsInterfaceTest", type: :system, js: true do
     }
     context "無効なmicropostを送信した場合" do
       before {
-        fill_in "micropost_content", with: ""
+        fill_in_rich_text_area "micropost_content", with: ""
         click_button "Post"
+        sleep 1
       }
       it "投稿できないこと" do
         expect(page).to have_css "div#error_explanation"
@@ -26,7 +27,7 @@ RSpec.describe "MicropostsInterfaceTest", type: :system, js: true do
     context "有効なmicropostを送信した場合" do
       content = "This micropost really ties the room together"
       before {
-        fill_in "micropost_content", with: content
+        fill_in_rich_text_area "micropost_content", with: content
         attach_file "micropost_picture", "#{Rails.root}/spec/factories/rails.png"
         click_button "Post"
       }
@@ -69,7 +70,7 @@ RSpec.describe "MicropostsInterfaceTest", type: :system, js: true do
     end
     context "micropostを1度投稿した場合" do
       before {
-        fill_in "micropost_content", with: "This micropost really ties the room together"
+        fill_in_rich_text_area "micropost_content", with: "This micropost really ties the room together"
         click_button "Post"
       }
       it "'1 micropost'と表示されること" do
