@@ -39,3 +39,5 @@ yarn-debug.log*
 /coverage/*
 
 /spec/examples.txt
+
+/public/uploads/*
