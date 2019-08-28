@@ -6,6 +6,7 @@ require "rspec/rails"
 require "capybara/rspec"
 require "factory_bot_rails"
 require "shoulda/matchers"
+require 'database_cleaner'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -53,6 +54,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include RequestHelpers, type: :request
   config.include SessionsHelper, type: :helper
+  config.include ActionTextHelper, type: :system
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
@@ -81,6 +83,16 @@ RSpec.configure do |config|
 
   # 失敗したテストだけを再実行できる（--only-failures オプション）
   config.example_status_persistence_file_path = "./spec/examples.txt"
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 end
 
 Shoulda::Matchers.configure do |config|

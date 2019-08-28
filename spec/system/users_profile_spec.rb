@@ -16,7 +16,7 @@ RSpec.describe "UsersProfile", type: :system, js: true do
     end
     it "Micropostのページネーションが正しく表示されていること" do
       user.microposts.paginate(page: 1).each do |micropost|
-        expect(page).to have_content "#{micropost.content}"
+        expect(page).to have_css "#micropost-#{micropost.id}"
       end
     end
   end
