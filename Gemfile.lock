@@ -274,7 +274,7 @@ GEM
     json (2.2.0)
     launchy (2.4.3)
       addressable (~> 2.3)
-    libv8 (3.16.14.19-x86_64-linux)
+    libv8 (3.16.14.19)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -310,7 +310,7 @@ GEM
     pg (0.20.0)
     public_suffix (3.1.1)
     puma (3.12.1)
-    rack (2.0.7)
+    rack (2.0.8)
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
